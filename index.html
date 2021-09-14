@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Jewerly Store</title>
+        <meta name="description" content="This is the description">
+        <script src="index.js"></script>
+    </head>
+    <body>
+        <header class="main-header">
+            <nav class="main-nav nav">
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="store.html">STORE</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                </ul>
+            </nav>
+            <h1 class="band-name band-name-large">Jewewrly Store</h1>
+        </header>
+        <section class="container content-section">
+            <div class="product-items">
+                <div class="product-item">
+                    <span class="product-item-name">Album 1</span>
+                    <img class="product-item-image" src="Images/1.jpg"  width="200" height="200">
+                    <div class="product-item-details">
+                        <span class="product-item-description">description</span>
+                        <span class="product-item-price">$12.99</span>
+                        <input class="product-quantity-input" type="number" value="1">
+                        <button class="btn btn-primary product-item-button" type="button">ADD TO CART</button>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <span class="product-item-name">Album 2</span>
+                    <img class="product-item-image" src="Images/2.jpg" width="200" height="200"> 
+                    <div class="product-item-details">
+                        <span class="product-item-description">description</span>
+                        <span class="product-item-price">$14.99</span>
+                        <input class="product-quantity-input" type="number" value="1">
+                        <button class="btn btn-primary product-item-button"type="button">ADD TO CART</button>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <span class="product-item-name">Album 3</span>
+                    <img class="product-item-image" src="Images/3.jpg"  width="200" height="200">
+                    <div class="product-item-details">
+                        <span class="product-item-description">description</span>
+                        <span class="product-item-price">$9.99</span>
+                        <input class="product-quantity-input" type="number" value="1">
+                        <button class="btn btn-primary product-item-button" type="button">ADD TO CART</button>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <span class="product-item-name">Album 4</span>
+                    <img class="product-item-image" src="Images/4.jpg"  width="200" height="200">
+                    <div class="product-item-details">
+                        <span class="product-item-description">description</span>
+                        <span class="product-item-price">$19.99</span>
+                        <input class="product-quantity-input" type="number" value="1">
+                        <button class="btn btn-primary product-item-button" type="button">ADD TO CART</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="container content-section">
+            <h2 class="section-header">CART</h2>
+            <div class="cart-row">
+                <span class="cart-item cart-header cart-column">ITEM</span>
+                <span class="cart-price cart-header cart-column">PRICE</span>
+                <span class="cart-quantity cart-header cart-column">QUANTITY</span>
+            </div>
+            <div class="cart-items">
+              
+            </div>
+            <div class="cart-total">
+                <strong class="cart-total-name">Total</strong>
+                <span class="cart-total-price">$0.0</span>
+            </div>
+            <button class="btn btn-primary btn-purchase" type="button">PURCHASE</button>
+        </section>
+    </body>
+</html>
