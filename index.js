@@ -5,6 +5,56 @@ if (document.readyState == 'loading') {
 }
 
 function ready() {
+
+    let jsonProducts = `[
+        {
+            "name":"product 1",
+            "description": "description 1...",
+            "imageSrc" : "Images/1.jpg",
+            "price":14
+        },
+        {
+            "name":"product 2",
+            "description": "description 2...",
+            "imageSrc" : "Images/2.jpg",
+            "price":28
+        },
+        {
+            "name":"product 3",
+            "description": "description 3...",
+            "imageSrc" : "Images/3.jpg",
+            "price":114
+        },
+        {
+            "name":"product 4",
+            "description": "description 4...",
+            "imageSrc" : "Images/4.jpg",
+            "price":292
+        }
+    ]`
+    
+    products=JSON.parse(jsonProducts);
+    console.log(products.length)
+    for (let i = 0; i < products.length; i++) {
+      var productRow = document.createElement("div");
+      productRow.classList.add("product-item");
+      var productItems = document.getElementsByClassName("product-items")[0];
+    
+      var productRowContents = ` 
+        <div class="product-item">    
+        <img class="product-item-image" src="${(products)[i].imageSrc}" width="200" height="200">
+        <div class="product-item-name">${'name: '+(products)[i].name}</div>
+        <div class="product-item-details">
+            <div class="product-item-description">${'description: '+(products)[i].description}</div>
+            <div class="product-item-price">${(products)[i].price+'$'}</div>
+            <input class="product-quantity-input" type="number" value="1">
+            <button class="btn btn-primary product-item-button" type="button">ADD TO CART</button>
+        </div>`;
+      productRow.innerHTML = productRowContents;
+      productItems.append(productRow);
+    }
+    
+
     var removeCartItemButtons = document.getElementsByClassName('btn-danger')
     for (var i = 0; i < removeCartItemButtons.length; i++) {
         var button = removeCartItemButtons[i]
@@ -31,7 +81,7 @@ function ready() {
 
     document.getElementsByClassName('btn-purchase')[0].addEventListener('click', purchaseClicked)
 
-    document.getElementsByClassName('cart-total-price')[0].addEventListener('change',cartIsEmpty)
+    document.getElementsByClassName('cart-total-price')[0].addEventListener('DOMSubtreeModified',cartIsEmpty)
 }
 
 function purchaseClicked() {
@@ -47,6 +97,7 @@ function removeCartItem(event) {
     var buttonClicked = event.target
     buttonClicked.parentElement.parentElement.remove()
     updateCartTotal()
+
 }
 
 function quantityChanged(event) {
@@ -54,6 +105,7 @@ function quantityChanged(event) {
     if (isNaN(input.value) || input.value <= 0) {
         input.value = 1
     }
+    input.value= Math.round(input.value)
     updateCartTotal()
 }
 
@@ -62,6 +114,7 @@ function quantityProductChanged(event) {
     if (isNaN(input.value) || input.value <= 0) {
         input.value = 1
     }
+    input.value= Math.round(input.value)
 }
 
 function addToCartClicked(event) {
@@ -82,6 +135,7 @@ function addItemToCart(productItem,name, price, imageSrc,quantity) {
     var cartItemNames = cartItems.getElementsByClassName('cart-item-name')
     for (var i = 0; i < cartItemNames.length; i++) {
         if (cartItemNames[i].innerText == name) {
+            productItem.getElementsByClassName('product-quantity-input')[0].value=1;
             alert('This item is already added to the cart')
             return
         }
@@ -90,9 +144,9 @@ function addItemToCart(productItem,name, price, imageSrc,quantity) {
     var cartRowContents = ` 
         <div class="cart-item cart-column">
             <img class="cart-item-image" src="${imageSrc}" width="200" height="200">
-            <span class="cart-item-name">${name}</span>
+            <div class="cart-item-name">${name}</div>
         </div>
-        <span class="cart-price cart-column">${price}</span>
+        <div class="cart-price cart-column">${price}</div>
         <div class="cart-quantity cart-column">
             <input class="cart-quantity-input" type="number" value="${quantity}">
             <button class="btn btn-danger" type="button">REMOVE</button>
@@ -120,7 +174,9 @@ function updateCartTotal() {
     document.getElementsByClassName('cart-total-price')[0].innerText = '$' + total
 }
 
-function cartIsEmpty() {
+function cartIsEmpty(event) {
+    if(event.path[0].outerText == 0)
+        return;
     var cartItemContainer = document.getElementsByClassName('cart-items')[0]
     var cartRows = cartItemContainer.getElementsByClassName('cart-row')
     if(cartRows.length==0)

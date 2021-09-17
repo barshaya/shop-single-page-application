@@ -1,0 +1,59 @@
+* {
+    box-sizing: border-box;
+    background-color:darkcyan;
+    color:white;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+h1{
+    margin-left: 200px;
+    font-size: 60px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.5em;
+
+}
+.btn {
+    text-align: center;
+    vertical-align: middle;
+    padding: .67em .67em;
+    cursor: pointer;
+}
+.btn-primary {
+    color: black;
+    background-color: white;
+    border: none;
+    border-radius: .3em;
+    font-weight: bold;
+}
+
+.btn-primary:hover {
+    background-color: white;
+}
+
+img{
+    border:5px solid white;
+}
+
+.product-item{
+    margin-bottom:25px;
+}
+
+.btn-danger {
+    color: white;
+    background-color: #EB5757;
+    border: none;
+    border-radius: .3em;
+    font-weight: bold;
+}
+
+.btn-danger:hover {
+    background-color: #CC4C4C;
+}
