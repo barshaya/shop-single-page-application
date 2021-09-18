@@ -30,6 +30,30 @@ function ready() {
             "description": "description 4...",
             "imageSrc" : "Images/4.jpg",
             "price":292
+        },
+        {
+            "name":"product 5",
+            "description": "description 5...",
+            "imageSrc" : "Images/5.jpg",
+            "price":145
+        },
+        {
+            "name":"product 6",
+            "description": "description 6...",
+            "imageSrc" : "Images/6.jpg",
+            "price":286
+        },
+        {
+            "name":"product 7",
+            "description": "description 7...",
+            "imageSrc" : "Images/7.jpg",
+            "price":117
+        },
+        {
+            "name":"product 8",
+            "description": "description 8...",
+            "imageSrc" : "Images/8.jpg",
+            "price":298
         }
     ]`
     
@@ -84,6 +108,12 @@ function ready() {
 }
 
 function purchaseClicked() {
+    var cartItemContainer = document.getElementsByClassName('cart-items')[0]
+    var cartRows = cartItemContainer.getElementsByClassName('cart-row')
+    if(cartRows.length==0){
+        cartIsEmpty()
+        return;
+    }
     alert('Thank you for your purchase')
     var cartItems = document.getElementsByClassName('cart-items')[0]
     while (cartItems.hasChildNodes()) {
