@@ -81,7 +81,6 @@ function ready() {
 
     document.getElementsByClassName('btn-purchase')[0].addEventListener('click', purchaseClicked)
 
-    document.getElementsByClassName('cart-total-price')[0].addEventListener('DOMSubtreeModified',cartIsEmpty)
 }
 
 function purchaseClicked() {
@@ -97,7 +96,7 @@ function removeCartItem(event) {
     var buttonClicked = event.target
     buttonClicked.parentElement.parentElement.remove()
     updateCartTotal()
-
+    cartIsEmpty()
 }
 
 function quantityChanged(event) {
@@ -174,11 +173,13 @@ function updateCartTotal() {
     document.getElementsByClassName('cart-total-price')[0].innerText = '$' + total
 }
 
-function cartIsEmpty(event) {
-    if(event.path[0].outerText == 0)
-        return;
+function cartIsEmpty() {
     var cartItemContainer = document.getElementsByClassName('cart-items')[0]
     var cartRows = cartItemContainer.getElementsByClassName('cart-row')
-    if(cartRows.length==0)
-        alert("cart is empty")
+    if(cartRows.length==0){
+        setTimeout(function () {
+            alert('cart is empty');
+        }, 10);        
+    }
+
 }
