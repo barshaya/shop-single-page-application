@@ -58,7 +58,6 @@ function ready() {
     ]`
     
     products=JSON.parse(jsonProducts);
-    console.log(products.length)
     for (let i = 0; i < products.length; i++) {
       var productRow = document.createElement("div");
       productRow.classList.add("product-item");
@@ -67,8 +66,8 @@ function ready() {
       var productRowContents = ` 
         <div class="product-item">    
         <img class="product-item-image" src="${(products)[i].imageSrc}" width="200" height="200">
-        <div class="product-item-name">${'name: '+(products)[i].name}</div>
         <div class="product-item-details">
+            <div class="product-item-name">${'name: '+(products)[i].name}</div>
             <div class="product-item-description">${'description: '+(products)[i].description}</div>
             <div class="product-item-price">${(products)[i].price+'$'}</div>
             <input class="product-quantity-input" type="number" value="1">
@@ -78,6 +77,11 @@ function ready() {
       productItems.append(productRow);
     }
     
+    var shopCart = document.getElementById('shop-cart-button')
+    shopCart.addEventListener('click',showShopCart)
+
+    var closeShopCart = document.getElementsByClassName('cart-close')[0]
+    closeShopCart.addEventListener('click',hideShopCart)
 
     var removeCartItemButtons = document.getElementsByClassName('btn-danger')
     for (var i = 0; i < removeCartItemButtons.length; i++) {
@@ -120,11 +124,23 @@ function purchaseClicked() {
         cartItems.removeChild(cartItems.firstChild)
     }
     updateCartTotal()
+    closeShopCart();
 }
+
+function showShopCart(){
+    var shopCart = document.getElementsByClassName('cart-section')[0]
+    shopCart.classList.remove("cart-section-hide")
+}
+
+function hideShopCart(){
+    var shopCart = document.getElementsByClassName('cart-section')[0]
+    shopCart.classList.add("cart-section-hide")
+}
+
 
 function removeCartItem(event) {
     var buttonClicked = event.target
-    buttonClicked.parentElement.parentElement.remove()
+    buttonClicked.parentElement.parentElement.parentElement.remove()
     updateCartTotal()
     cartIsEmpty()
 }
@@ -155,6 +171,7 @@ function addToCartClicked(event) {
     var quantity = productItem.getElementsByClassName('product-quantity-input')[0].value
     addItemToCart(productItem,name, price, imageSrc,quantity)
     updateCartTotal()
+    showShopCart()
 }
 
 function addItemToCart(productItem,name, price, imageSrc,quantity) {
@@ -171,14 +188,14 @@ function addItemToCart(productItem,name, price, imageSrc,quantity) {
     }
 
     var cartRowContents = ` 
-        <div class="cart-item cart-column">
-            <img class="cart-item-image" src="${imageSrc}" width="200" height="200">
+        <div class="cart-item">
+            <img class="cart-item-image" src="${imageSrc}" width="70" height="70">
+            <div class="cart-details">
             <div class="cart-item-name">${name}</div>
-        </div>
-        <div class="cart-price cart-column">${price}</div>
-        <div class="cart-quantity cart-column">
+            <div class="cart-price">${price}</div>
             <input class="cart-quantity-input" type="number" value="${quantity}">
             <button class="btn btn-danger" type="button">REMOVE</button>
+            </div>
         </div>`
     cartRow.innerHTML = cartRowContents
     cartItems.append(cartRow)
